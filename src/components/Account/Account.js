@@ -221,9 +221,7 @@ function Account(props) {
                     </div>
                 </div>
             </div>
-
             <hr />
-
             <div className={styles.section}>
                 <div className={styles.projectsHeader}>
                     <div className={styles.title}>Your Projects</div>

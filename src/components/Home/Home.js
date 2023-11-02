@@ -56,7 +56,7 @@ function Home(props) {
             )}
             <div className={styles.header}>
                 <div className={styles.left}>
-                    <p className={styles.heading}>Projects Fair</p>
+                    <p className={styles.heading}>ProManage</p>
                     <p className={styles.subHeading}>
                         One stop destination for all software development Projects
                     </p>

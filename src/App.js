@@ -35,8 +35,6 @@ function App() {
     <div>
       <Router>
         {isDataLoaded ? (
-
-
           <Routes>
             {!isAuthenticated && (
               <>
@@ -45,7 +43,7 @@ function App() {
               </>
             )
             }
-            <Route path='/account' element={<h1>{<Account userDetails={userDetails} auth={isAuthenticated} />}</h1>} />
+            <Route path='/account' element={<Account userDetails={userDetails} auth={isAuthenticated} />} />
             <Route path='/' element={<Home auth={isAuthenticated} />} />
             <Route path='/*' element={<Navigate to='/' />} />
           </Routes>
