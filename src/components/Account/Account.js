@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { signOut } from "firebase/auth";
 import { Camera, LogOut, Edit2, Trash, GitHub, Paperclip } from "react-feather";
 import { Link, Navigate } from "react-router-dom";
@@ -103,7 +103,7 @@ function Account(props) {
         setShowSaveDetailsButton(false);
     };
 
-    const fetchAllProjects = async () => {
+    const fetchAllProjects = useCallback(async () => {
         const result = await getAllProjectsForUser(userDetails.uid);
         if (!result) {
             setProjectsLoaded(true);
@@ -114,7 +114,7 @@ function Account(props) {
         let tempProjects = [];
         result.forEach((doc) => tempProjects.push({ ...doc.data(), pid: doc.id }));
         setProjects(tempProjects);
-    };
+    }, [userDetails.uid]);
 
     const handleEditClick = (project) => {
         setIsEditProjectModal(true);
@@ -129,7 +129,7 @@ function Account(props) {
 
     useEffect(() => {
         fetchAllProjects();
-    }, []);
+    }, [fetchAllProjects]);
 
     return isAuthenticated ? (
         <div className={styles.container}>
@@ -162,14 +162,14 @@ function Account(props) {
                 <div className={styles.profile}>
                     <div className={styles.left}>
                         <div className={styles.image}>
-                            <img src={profileImageUrl} alt="Profile image" />
+                            <img src={profileImageUrl} alt="Profile" />
                             <div className={styles.camera} onClick={handleCameraClick}>
                                 <Camera />
                             </div>
                         </div>
                         {profileImageUploadStarted ? (
                             <p className={styles.progress}>
-                                {progress == 100
+                                {progress === 100
                                     ? "Getting image url..."
                                     : `${progress.toFixed(2)}% uploaded`}
                             </p>
